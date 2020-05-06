@@ -1,10 +1,26 @@
 {
   "name": "kai-tictactoe",
-  "author": "Kai Arrowood",
-  "email": "ka65359@gmail.com",
   "version": "1.0.0",
+  "description": "Simple React TicTacToe Game",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ka65359/kai-tictactoe.git"
+  },
+  "author": "Kai Arrowood",
   "license": "MIT",
-  "private": true,
+  "scripts": {
+    "build": "react-scripts build",
+    "clean": "yarn cache clean && yarn install",
+    "format": "prettier --write \"**/*.{js,md,scss}\"",
+    "format:diff": "prettier --list-different \"**/*.{js,md,scss}\"",
+    "format:staged": "prettier --write",
+    "start": "react-scripts start",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -13,25 +29,49 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependecies": {
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-conventional": "^7.5.0",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.5",
+    "node-sass": "^4.12.0",
+    "prettier": "^1.17.0"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "husky": {
+   "hooks": {
+     "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+     "pre-commit": "lint-staged"
+   }
+ },
+ "commitlint": {
+   "extends": [
+     "@commitlint/config-conventional"
+   ]
+ },
+ "lint-staged": {
+   "*.js": [
+     "yarn format:staged",
+     "git add"
+   ],
+   "*.{scss,css}": [
+     "yarn format:staged",
+     "git add"
+   ],
+   "*.md": [
+     "yarn format:staged",
+     "git add"
+   ]
+ },
+ "prettier": {
+   "requirePragma": false,
+   "insertPragma": true,
+   "printWidth": 80,
+   "tabWidth": 2,
+   "jsxBracketSameLine": true,
+   "bracketSpacing": true,
+   "arrowParens": "always",
+   "semi": true,
+   "trailingComma": "es5",
+   "endOfLine": "lf"
+ }
 }
